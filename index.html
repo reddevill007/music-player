@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700;900&family=Chonburi&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Chivo', sans-serif;
+        height: 100vh;
+        width: 100vw;
+        background-image: linear-gradient(rgba(35, 43, 56, 0.9), rgba(35, 43, 56, 0.9)), url('pic-1.jpg');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .music-box {
+        width: 300px;
+        min-height: 400px;
+        background: rgba(135, 137, 166, 0.7);
+        padding: 10px;
+        text-align: center;
+        box-shadow: 0px 0px 21px 0px rgba(0, 0, 0, 0.9);
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .music-box h1 {
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 1.3px;
+        color: #61d065;
+    }
+
+    .music-box h3 {
+        font-size: 20px;
+        font-weight: 400;
+        color: #9ebd3d;
+    }
+
+    .music-box .song-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .music-box .song-img img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .music-box audio {
+        width: 100%;
+        outline: none;
+    }
+
+    .music-box .controls {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+    }
+
+    .music-box .controls img {
+        width: 60px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 500px) {
+        .music-box{
+            width: 250px;
+        }
+    }
+</style>
+
+<body>
+    <!-- Music Box -->
+    <div class="music-box">
+        <h1 id="heading">Song 1 Name</h1>
+        <h3 id="sub-heading">Singer 1</h3>
+        <div class="song-img">
+            <img src="pic-1.jpg" alt="pic" id="song-img">
+        </div>
+        <audio controls id="audio">
+            <source src="audio1.mp3" type="audio/mp3">
+        </audio>
+        <div class="controls">
+            <div class="prev">
+                <img src="prev.png" alt="" id="prev">
+            </div>
+            <div class="play">
+                <img src="play.png" alt="" id="play">
+            </div>
+            <div class="next">
+                <img src="next.png" alt="" id="next">
+            </div>
+        </div>
+    </div>
+    <!-- Music Box End -->
+
+    <script>
+        // Declaration of variables
+        const heading = document.getElementById('heading');
+        const subHeading = document.getElementById('sub-heading');
+        const songImg = document.getElementById('song-img');
+        const audio = document.getElementById('audio');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        const play = document.getElementById('play');
+
+        // Play/Pause Btn Js
+        play.onclick = function () {
+            if (audio.paused) {
+                audio.play();
+                play.src = "pause.png";
+            }
+
+            else {
+                audio.pause();
+                play.src = "play.png";
+            }
+        }
+
+        // Audio control play/pause btn Js
+        audio.addEventListener('play', () => {
+            play.src = "pause.png";
+        });
+        audio.addEventListener('pause', () => {
+            play.src = "play.png";
+        });
+
+
+        // Array containing background images and song image
+        var img = new Array(
+            "pic-1.jpg",
+            "pic-2.jpg",
+            "pic-3.jpg",
+            "pic-4.jpg"
+        );
+
+        // Array containing songs
+        var music = new Array(
+            "audio1.mp3",
+            "audio2.mp3",
+            "audio3.mp3",
+            "audio4.mp3"
+        );
+
+        // Array containing song names
+        var song = new Array(
+            "Song 1 Name",
+            "Song 2 Name",
+            "Song 3 Name",
+            "Song 4 Name"
+        );
+
+        // Array containing artist names
+        var artist = new Array(
+            "Singer 1",
+            "Singer 2",
+            "Singer 3",
+            "Singer 4"
+        );
+
+        let i = 0;
+
+        // Next click event
+        next.onclick = function () {
+            if (i <= 3) {
+                // making loop of songs
+                if (i == 3) {
+                    i = -1; // because we are using i++ so -1 + 2 = 0
+                }
+
+                // background change
+                document.body.style.backgroundImage = 'linear-gradient(rgba(35, 43, 56, 0.9), rgba(35, 43, 56, 0.9)), url("' + img[i + 1] + '")';
+
+                // Song img change
+                songImg.src = img[i + 1];
+
+                // audio change and play it
+                audio.src = music[i + 1];
+                audio.play();
+                play.src = "pause.png";
+
+                // Changing song name and artist name
+                heading.innerHTML = song[i + 1];
+                subHeading.innerHTML = artist[i + 1];
+                i++;
+            }
+        }
+
+        // Previous click event
+        prev.onclick = function () {
+            if (i >= 0) {
+                // making loop of songs
+                if (i == 0) {
+                    i = 4; // because we are using i-- so 4 - 1 = 3
+                }
+
+                // background change
+                document.body.style.backgroundImage = 'linear-gradient(rgba(35, 43, 56, 0.9), rgba(35, 43, 56, 0.9)), url("' + img[i - 1] + '")';
+
+                // Song img change
+                songImg.src = img[i - 1];
+
+                // audio change and play it
+                audio.src = music[i - 1];
+                audio.play();
+                play.src = "pause.png";
+
+                // Changing song name and artist name
+                heading.innerHTML = song[i - 1];
+                subHeading.innerHTML = artist[i - 1];
+                i--;
+            }
+        }
+    </script>
+</body>
+
+
+</html>
