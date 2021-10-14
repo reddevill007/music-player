@@ -6,35 +6,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Player</title>
+
+    <!---- CSS Linkage ------>
     <link rel="stylesheet" href="style.css">
+
+    <!---- Font Awesome Cdn Linkage ------>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!------- Favicon Linkage --------->
+    <link rel="shortcut icon" href="fav.png" type="image/x-icon">
 </head>
 
 
 <body>
-    <!-- Music Box -->
+    <!---- Music Box ------>
     <div class="music-box">
+        <!---- Menu ------>
+        <div id="tbox">
+            <div class="toogle" id="toogle"></div>
+        </div>
+
+
+        <!---- Menu ------>
+        <div class="list" id="list">
+            <a href="audio1.mp3" download id="link"><i class="fas fa-file-download"></i> Download</a>
+        </div>
+
+
+        <!---- Song Name ------>
         <h1 id="heading">Song 1 Name</h1>
+
+        <!---- Singer Name ------>
         <h3 id="sub-heading">Singer 1</h3>
+
+
+        <!---- Song Image ------>
         <div class="song-img">
             <img src="pic-1.jpg" alt="pic" id="song-img">
         </div>
-        <audio controls id="audio">
+        <!---- Song Image End ------>
+
+
+        <!---- Audio Section ------>
+        <audio id="audio">
             <source src="audio1.mp3" type="audio/mp3">
         </audio>
+        <!---- Audio Section End ------>
+
+
+        <!---- Song Progress Bar ------>
+        <div class="progress_bar" id="progress_bar">
+            <div class="progress" id="progress"></div>
+            <div class="box" id="box"></div>
+        </div>
+        <!---- Song Progress Bar End ------>
+
+
+        <!---- Duration and Mute/Unmute Btn ------>
+        <div class="duration">
+            <div class="mutebtn" id="mutebtn">
+                <i class='fas fa-volume-up'></i>
+            </div>
+            <div class="time">
+                <p id="current">0:00</p>/ <p id="total">0:00</p>
+            </div>
+        </div>
+        <!---- Duration and Mute/Unmute Btn End ------>
+
+
+        <!---- Song Control Panel ------>
         <div class="controls">
+
+            <!---- Previous Btn ------>
             <div class="prev">
                 <img src="prev.png" alt="" id="prev">
             </div>
+
+            <!---- Play/Pause Btn ------>
             <div class="play">
                 <img src="play.png" alt="" id="play">
             </div>
+
+            <!---- Next btn ------>
             <div class="next">
                 <img src="next.png" alt="" id="next">
             </div>
-        </div>
-    </div>
-    <!-- Music Box End -->
 
+        </div>
+        <!---- Song Control Panel End ------>
+
+    </div>
+    <!---- Music Box End ------>
+
+    <!---- Js Linkage ------>
     <script src="app.js"></script>
 </body>
 

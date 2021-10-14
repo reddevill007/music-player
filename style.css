@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
@@ -29,6 +30,98 @@ body {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    position: relative;
+}
+
+#tbox{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background: transparent;
+    top: 8px;
+    right: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.toogle{
+    height: 6px;
+    width: 6px;
+    background-color: #b0e60f;
+    border-radius: 50%;
+    position: relative;
+}
+
+.toogle::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 9px;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.toogle::after{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: -9px;
+    border-radius: 50%;
+    background-color: inherit;
+}
+
+.toogle.active{
+    height: 2px;
+    width: 20px;
+    background: #b0e60f;
+    position: relative;
+    z-index: 100;
+    transform: rotate(-45deg);
+    border-radius: 0;
+}
+
+.toogle.active::before{
+    display: none;
+}
+
+.toogle.active::after{
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 2px;
+    left: 0;
+    top: 0px;
+    border-radius: 0;
+    transform: rotate(90deg);
+    background-color: inherit;
+}
+
+.music-box .list{
+    position: absolute;
+    top: 50px;
+    right: 17px;
+    padding: 10px 8px;
+    background: rgba(97, 98, 107, .7);
+    border-radius: 2px;
+    display: none;
+}
+
+.music-box .list a{
+    color: #61d065;
+}
+
+.music-box .list a i{
+    margin-right: 8px;
+}
+
+.music-box .list.active{
+    display: block;
 }
 
 .music-box h1 {
@@ -57,9 +150,64 @@ body {
     border-radius: 50%;
 }
 
+.music-box .song-img img.anime {
+    animation: boomer 1.5s infinite linear;
+}
+
 .music-box audio {
     width: 100%;
     outline: none;
+}
+
+.music-box .progress_bar{
+    height: 6px;
+    width: 100%;
+    background: #aaa;
+    transition: all 0.1s;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.music-box .progress_bar .progress{
+    height: 6px;
+    background: #b0e60f;
+    width: 0%;
+    border-radius: 5px;
+    transition: all 0.1s;
+}
+
+.music-box .duration{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.music-box .duration .mutebtn{
+    background: #8687a3;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.music-box .duration .mutebtn i{
+    color: #61d065;
+}
+
+.music-box .duration .mutebtn i.red{
+    color: #df553d;
+}
+
+.music-box .duration .time{
+    display: flex;
+    color: #61d065;
+}
+
+.music-box .duration p{
+    color: #61d065;
 }
 
 .music-box .controls {
@@ -79,5 +227,40 @@ body {
 @media (max-width: 500px) {
     .music-box{
         width: 250px;
+    }
+}
+
+@keyframes boomer {
+    0%{
+        transform: scale(1);
+        transform: rotate(0deg);
+    }
+    15%{
+        transform: scale(0.9);
+    }
+    25%{
+        transform: scale(0.6);
+    }
+    40%{
+        transform: scale(0.9);
+    }
+    50%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1);
+    }
+    65%{
+        transform: scale(0.8);
+    }
+    75%{
+        transform: scale(0.7);
+    }
+    85%{
+        transform: scale(0.8);
+    }
+    100%{
+        transform: scale(1);
+        transform: rotate(360deg);
     }
 }
